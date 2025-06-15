@@ -1,0 +1,21 @@
+sequenceDiagram
+    participant User
+    participant Teams Client
+    participant Frontend App (Tab)
+    participant Microsoft Entra ID
+    participant Backend API
+
+    User->>+Teams Client: Opens the custom application tab.
+    Teams Client->>+Frontend App (Tab): Loads the application's content URL.
+    Frontend App (Tab)->>Teams Client: Calls `authentication.getAuthToken()`.
+    Teams Client->>+Microsoft Entra ID: Requests an access token on behalf of the user.
+    Microsoft Entra ID-->>-Teams Client: Issues an access token.
+    Teams Client-->>-Frontend App (Tab): Returns the access token.
+    Frontend App (Tab)->>+Backend API: Makes API call with "Authorization: Bearer <token>" header.
+    Backend API->>+Microsoft Entra ID: Fetches public keys to validate token signature.
+    Microsoft Entra ID-->>-Backend API: Provides public keys (JWKS).
+    Backend API->>Backend API: Validates token (signature, audience, issuer, expiry).
+    Note over Backend API: If valid, processes the request.
+    Backend API-->>-Frontend App (Tab): Returns API data.
+    Frontend App (Tab)-->>User: Displays data to the user.
+

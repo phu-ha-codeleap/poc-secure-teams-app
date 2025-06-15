@@ -1,0 +1,44 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.16/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.16",
+  "version": "1.0.0",
+  "id": "<app-id>",
+  "developer": {
+      "name": "PoC Developer",
+      "websiteUrl": "<frontend-url>",
+      "privacyUrl": "<frontend-url>/privacy",
+      "termsOfUseUrl": "<frontend-url>/termsofuse"
+  },
+  "icons": {
+      "color": "color.png",
+      "outline": "outline.png"
+  },
+  "name": {
+      "short": "PoC SSO App",
+      "full": "Proof of Concept for Teams SSO"
+  },
+  "description": {
+      "short": "Demonstrates Teams SSO and Backend Auth",
+      "full": "This app shows how a Teams tab can securely call a backend API using the user's identity via Single Sign-On."
+  },
+  "accentColor": "#FFFFFF",
+  "staticTabs": [
+      {
+          "entityId": "ssoTab",
+          "name": "SSO Tab",
+          "contentUrl": "<frontend-url>/",
+          "websiteUrl": "<frontend-url>/",
+          "scopes": [
+              "personal"
+          ]
+      }
+  ],
+  "validDomains": [
+      "<frontend-url>/",
+      "<backend-url>"
+  ],
+  "webApplicationInfo": {
+      "id": "<app>",
+      "resource": "api://<frontend-url>/<app-id>"
+  }
+}
